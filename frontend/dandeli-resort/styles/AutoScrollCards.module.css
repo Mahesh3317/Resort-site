@@ -1,0 +1,17 @@
+.container {
+    overflow-x: auto;
+    width: 100%;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .content {
+    display: flex;
+    width: max-content;
+    gap: 20px;
+    will-change: transform;
+  }

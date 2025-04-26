@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FaFacebook, FaInstagram, FaTwitter, FaTripadvisor } from 'react-icons/fa';
 import { MdEmail, MdPhone, MdLocationOn } from 'react-icons/md';
-import styles from '@styles/Footer.module.css';
+import styles from '@styles/Home/Footer.module.css';
 
 export default function Footer() {
   return (

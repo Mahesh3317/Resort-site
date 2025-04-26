@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '@styles/PackagesSection.module.css';
+import styles from '@styles/Home/PackagesSection.module.css';
 
 export default function PackagesSection() {
   const packages = [

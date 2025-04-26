@@ -1,0 +1,146 @@
+.testimonialsSection {
+    padding: 5rem 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .sectionHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .sectionHeader h2 {
+    font-size: 2.2rem;
+    color: #2a7f62;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .testimonialsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .testimonialCard {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .testimonialCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  
+  .rating {
+    color: #f5a623;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .testimonialContent {
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+  }
+  
+  .testimonialText {
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.7;
+    font-style: italic;
+    position: relative;
+  }
+  
+  .testimonialText::before,
+  .testimonialText::after {
+    content: '"';
+    color: #2a7f62;
+    font-size: 1.5rem;
+    opacity: 0.3;
+  }
+  
+  .testimonialAuthor {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid #2a7f62;
+  }
+  
+  .testimonialAuthor h4 {
+    color: #2a7f62;
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  
+  .viewAll {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .viewAllButton {
+    display: inline-block;
+    background: #2a7f62;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #2a7f62;
+  }
+  
+  .viewAllButton:hover {
+    background: transparent;
+    color: #2a7f62;
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .testimonialsSection {
+      padding: 3rem 1.5rem;
+    }
+    
+    .testimonialsGrid {
+      grid-template-columns: 1fr;
+    }
+    
+    .sectionHeader h2 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .testimonialCard {
+      padding: 1.5rem;
+    }
+    
+    .avatar {
+      width: 40px;
+      height: 40px;
+    }
+  }

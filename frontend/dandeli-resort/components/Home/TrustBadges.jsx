@@ -1,5 +1,5 @@
 // components/TrustBadges.jsx
-import styles from '@/styles/TrustBadges.module.css';
+import styles from '@/styles/Home/TrustBadges.module.css';
 
 export default function TrustBadges() {
   return (

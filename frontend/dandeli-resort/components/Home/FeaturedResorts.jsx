@@ -1,6 +1,6 @@
-import AutoScrollCards from '@components/AutoScrollCards';
-import ResortCard from '@components/ResortCard';
-import styles from '@styles/FeaturedResorts.module.css';
+import AutoScrollCards from '@/components/Home/AutoScrollCards';
+import ResortCard from '@/components/Home/ResortCard';
+import styles from '@styles/Home/FeaturedResorts.module.css';
 
 const resorts = [
   {

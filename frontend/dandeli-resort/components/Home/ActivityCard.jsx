@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '@styles/ActivityCard.module.css';
+import styles from '@styles/Home/ActivityCard.module.css';
 
 export default function ActivityCard({ activity }) {
   return (

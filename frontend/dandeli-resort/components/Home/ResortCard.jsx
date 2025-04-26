@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '@styles/ResortCard.module.css';
+import styles from '@styles/Home/ResortCard.module.css';
 
 export default function ResortCard({ resort }) {
   return (

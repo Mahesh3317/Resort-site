@@ -1,0 +1,120 @@
+.contactSection {
+    padding: 4rem 2rem;
+    background-color: #fff;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #106c29;
+    font-weight: bold;
+  }
+  
+  .underline {
+    width: 60px;
+    height: 4px;
+    background-color: #106c29;
+    margin: 0.5rem auto 1rem;
+    border-radius: 2px;
+  }
+  
+  .subtitle {
+    color: #555;
+    font-size: 1.1rem;
+  }
+  
+  .contactContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+  
+  .contactForm {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+  }
+  
+  .row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    height: 150px;
+    resize: vertical;
+  }
+  
+  .submitButton {
+    background-color: #13a349;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background 0.3s;
+  }
+  
+  .submitButton:hover {
+    background-color: #0e7c36;
+  }
+  
+  .contactInfo {
+    flex: 1;
+    background-color: #f4f5f7;
+    padding: 2rem;
+    border-radius: 12px;
+    min-width: 280px;
+  }
+  
+  .infoTitle {
+    font-size: 1.5rem;
+    color: #106c29;
+    margin-bottom: 1.5rem;
+  }
+  
+  .infoItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+  }
+  
+  .socialLinks {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .socialLinks img {
+    width: 30px;
+    height: 30px;
+  }
+  

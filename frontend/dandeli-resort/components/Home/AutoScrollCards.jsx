@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import styles from '@styles/AutoScrollCards.module.css';
+import styles from '@styles/Home/AutoScrollCards.module.css';
 
 export default function AutoScrollCards({ children, speed = 30 }) {
   const containerRef = useRef(null);

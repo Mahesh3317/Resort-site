@@ -1,7 +1,7 @@
 // components/InquiryForm.jsx
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import styles from '@/styles/InquiryForm.module.css';
+import styles from '@/styles/Home/InquiryForm.module.css';
 
 export default function InquiryForm() {
   const [formData, setFormData] = useState({

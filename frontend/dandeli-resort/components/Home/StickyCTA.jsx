@@ -1,6 +1,6 @@
 // components/StickyCTA.jsx
 import { motion } from 'framer-motion';
-import styles from '@/styles/StickyCTA.module.css';
+import styles from '@/styles/Home/StickyCTA.module.css';
 import { useEffect, useState } from 'react';
 
 export default function StickyCTA() {

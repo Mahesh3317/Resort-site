@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { FaBars, FaTimes, FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
-import styles from '@styles/Navbar.module.css';
+import styles from '@styles/Home/Navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,7 +61,7 @@ export default function Navbar() {
           <Link href="/about" className={styles.navLink}>About</Link>
           <Link href="/activities" className={styles.navLink}>Activities</Link>
           <Link href="/packages" className={styles.navLink}>Packages</Link>
-          <Link href="/facility" className={styles.navLink}>Facilities</Link>
+          <Link href="/Resorts" className={styles.navLink}>Resorts</Link>
           <Link href="/blog" className={styles.navLink}>Blog</Link>
           <Link href="/inquiry" className={styles.ctaLink}>Contact</Link>
         </div>

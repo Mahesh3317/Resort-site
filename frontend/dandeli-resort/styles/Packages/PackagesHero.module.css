@@ -1,0 +1,37 @@
+.hero {
+  background-image: url('/img/pexels-enginakyurt-1579253.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.content {
+  text-align: center;
+}
+
+.content h2,
+.content p {
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.bookButton {
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  background-color: #1ea97c;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bookButton:hover {
+  background-color: #178b65;
+}

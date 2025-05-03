@@ -1,13 +1,19 @@
-import Layout from '@/components/Home/Layout';
+import AboutSection from '@/components/About/AboutSection';
+import OurStory from '@/components/About/OurStory';
+import WhatWeOffer from '@/components/About/WhatWeOffer';
+import MeetOurTeam from '@/components/About/MeetOurTeam';
+import WhyChooseUs from '@/components/About/WhyChooseUs';
+import OurExpert from '@/components/About/OurExpert';
 
-export default function About() {
-  return (
-    <Layout>
-      <div className="container">
-        <h1>About Dandeli Resort</h1>
-        <p>Welcome to our beautiful resort...</p>
-        {/* Add more content */}
-      </div>
-    </Layout>
+export default function About() { 
+  return (   
+    <>
+      <AboutSection />
+      <OurStory />
+      <WhatWeOffer />
+      <MeetOurTeam />
+      <WhyChooseUs />
+      <OurExpert />
+    </>
   );
 }

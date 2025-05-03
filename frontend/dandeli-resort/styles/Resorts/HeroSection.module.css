@@ -1,0 +1,58 @@
+.hero {
+  position: relative;
+  background-image: url('/img/resort1.jpg'); /* Your image */
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left; /* Add this to center content */
+}
+
+.overlay {
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center; /* Center the text inside */
+  width: 100%;
+  max-width: 600px; /* Optional: controls text width */
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #ffffff; /* Add if text looks dark on image */
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #ffffff; /* Add if text looks dark on image */
+}
+
+.button {
+  background-color: #3b82f6;
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #2563eb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+}

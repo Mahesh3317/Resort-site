@@ -370,8 +370,9 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 }
 
 export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
-  collectionName: 'blog_post';
+  collectionName: 'blog_posts';
   info: {
+    description: '';
     displayName: 'Blog Post';
     pluralName: 'blog-posts';
     singularName: 'blog-post';
@@ -380,20 +381,30 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    content: Schema.Attribute.RichText;
-    coverImage: Schema.Attribute.Media;
+    Author: Schema.Attribute.String;
+    Category: Schema.Attribute.Enumeration<
+      ['ADVENTURE', 'WILDLIFE', 'ACCOMMODATION', 'TRAVEL_TIPS']
+    >;
+    Content: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    Excerpt: Schema.Attribute.String;
+    Featured_Image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::blog-post.blog-post'
     > &
       Schema.Attribute.Private;
+    Published_Date: Schema.Attribute.Date;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
+    Read_Time: Schema.Attribute.BigInteger;
+    Slug: Schema.Attribute.UID;
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

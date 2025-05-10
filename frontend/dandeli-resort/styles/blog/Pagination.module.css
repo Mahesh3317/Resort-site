@@ -1,0 +1,33 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.pageLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: #4a6b57;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.pageLink:hover {
+  background-color: #f0f0f0;
+}
+
+.active {
+  background-color: #4a6b57;
+  color: white;
+}
+
+.active:hover {
+  background-color: #3a5a47;
+}

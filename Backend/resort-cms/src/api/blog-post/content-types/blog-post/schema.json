@@ -1,31 +1,56 @@
 {
-    "collectionName": "blog_post",
-    "info": {
-      "singularName": "blog-post",
-      "pluralName": "blog-posts",
-      "displayName": "Blog Post"
+  "kind": "collectionType",
+  "collectionName": "blog_posts",
+  "info": {
+    "singularName": "blog-post",
+    "pluralName": "blog-posts",
+    "displayName": "Blog Post",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
     },
-    "options": {
-      "draftAndPublish": true
+    "Slug": {
+      "type": "uid"
     },
-    "attributes": {
-      "title": {
-        "type": "string",
-        "required": true
-      },
-      "slug": {
-        "type": "uid",
-        "targetField": "title",
-        "required": true
-      },
-      "content": {
-        "type": "richtext"
-      },
-      "coverImage": {
-        "type": "media",
-        "multiple": false,
-        "required": false
-      }
+    "Category": {
+      "type": "enumeration",
+      "enum": [
+        "ADVENTURE",
+        "WILDLIFE",
+        "ACCOMMODATION",
+        "TRAVEL_TIPS"
+      ]
+    },
+    "Excerpt": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "richtext"
+    },
+    "Author": {
+      "type": "string"
+    },
+    "Published_Date": {
+      "type": "date"
+    },
+    "Read_Time": {
+      "type": "biginteger"
+    },
+    "Featured_Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
-  
+}

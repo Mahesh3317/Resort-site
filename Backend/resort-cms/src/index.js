@@ -1,20 +1,16 @@
-'use strict';
-
 module.exports = {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/*{ strapi }*/) {},
-
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
-  bootstrap(/*{ strapi }*/) {},
+  async bootstrap({ strapi }) {
+    try {
+      // Force-register the content type
+      const contentType = strapi.contentTypes['api::blog-post.blog-post'];
+      if (contentType) {
+        await strapi.contentType('api::blog-post.blog-post').refresh();
+        console.log('Successfully refreshed blog-post content type');
+      } else {
+        console.log('Blog post content type not found');
+      }
+    } catch (error) {
+      console.error('Bootstrap error:', error);
+    }
+  }
 };

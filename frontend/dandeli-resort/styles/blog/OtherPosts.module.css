@@ -1,0 +1,68 @@
+.otherPosts {
+  margin-top: 3rem;
+}
+
+.postsList {
+  display: grid;
+  gap: 2rem;
+}
+
+.postCard {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.postCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.category {
+  display: inline-block;
+  font-weight: bold;
+  color: #4a6b57;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+}
+
+.title {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: #222;
+}
+
+.excerpt {
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.postMeta {
+  color: #666;
+  font-size: 0.8rem;
+  margin: 1rem 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.readMore {
+  color: #4a6b57;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin-top: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.readMore:hover {
+  color: #3a5a47;
+  text-decoration: underline;
+}

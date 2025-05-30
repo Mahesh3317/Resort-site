@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_inquiries",
+  "info": {
+    "singularName": "contact-inquiry",
+    "pluralName": "contact-inquiries",
+    "displayName": "Contact Inquiry",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30,
+      "minLength": 1
+    },
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "biginteger",
+      "unique": true,
+      "required": true
+    },
+    "package_interest": {
+      "type": "enumeration",
+      "enum": [
+        "Adventure Package",
+        "Family Package",
+        "Couple Package",
+        "Corporate Package",
+        "Other Packages"
+      ],
+      "default": "Adventure Package"
+    },
+    "preferred_dates": {
+      "type": "date"
+    },
+    "message": {
+      "type": "string"
+    }
+  }
+}

@@ -1,7 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '@styles/Home/ContactUs.module.css';
+import axios from 'axios';
 
 function ContactUs() {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    packageInterest: '',
+    preferredDates: '',
+    message: ''
+  });
+
+  const [status, setStatus] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  function formatDisplayDate(input) {
+    if (!input) return '';
+    const date = new Date(input);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // ✅ Only require name and phone
+    if (!form.name || !form.phone) {
+      setStatus("Please fill in your name and phone number.");
+      return;
+    }
+
+    setLoading(true);
+    setStatus('');
+
+    try {
+      // ✅ Only send non-empty optional fields
+      const formData = {
+        name: form.name,
+        phone: form.phone,
+      };
+
+      if (form.email) formData.email = form.email;
+      if (form.preferredDates) formData.preferred_dates = form.preferredDates;
+      if (form.packageInterest) formData.package_interest = form.packageInterest;
+      if (form.message) formData.message = form.message;
+
+      await axios.post('http://localhost:1337/api/contact-inquiries', { data: formData }, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      setStatus("Inquiry submitted successfully!");
+      setForm({
+        name: '',
+        email: '',
+        phone: '',
+        packageInterest: '',
+        preferredDates: '',
+        message: ''
+      });
+    } catch (error) {
+      if (error.response) {
+        console.error("Strapi Response Error:", error.response.data);
+        setStatus(error.response.data.error?.message || "Submission failed. Try again.");
+      } else {
+        console.error("Unexpected Error:", error.message);
+        setStatus("Unexpected error. Try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className={styles.contactSection}>
       <div className={styles.header}>
@@ -13,32 +91,84 @@ function ContactUs() {
       </div>
 
       <div className={styles.contactContainer}>
-        {/* Left: Contact Form */}
-        <form className={styles.contactForm}>
+        <form className={styles.contactForm} onSubmit={handleSubmit}>
           <div className={styles.row}>
-            <input type="text" placeholder="Your Name" className={styles.input} />
-            <input type="email" placeholder="Email Address" className={styles.input} />
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              className={styles.input}
+              value={form.name}
+              onChange={handleChange}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              className={styles.input}
+              value={form.email}
+              onChange={handleChange}
+            />
           </div>
 
           <div className={styles.row}>
-            <input type="text" placeholder="Phone Number" className={styles.input} />
-            <select className={styles.input}>
-              <option>Package Interest</option>
-              <option>Adventure Package</option>
-              <option>Family Package</option>
-              <option>Corporate Package</option>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone Number"
+              className={styles.input}
+              value={form.phone}
+              onChange={handleChange}
+            />
+            <select
+              name="packageInterest"
+              className={styles.input}
+              value={form.packageInterest}
+              onChange={handleChange}
+            >
+              <option value="">Package Interest</option>
+              <option value="Adventure Package">Adventure Package</option>
+              <option value="Family Package">Family Package</option>
+              <option value="Couple Package">Couple Package</option>
+              <option value="Corporate Package">Corporate Package</option>
+              <option value="Other Packages">Other Packages</option>
             </select>
           </div>
 
-          <input type="text" placeholder="Preferred Dates" className={styles.input} />
-          <textarea placeholder="Your Message" className={styles.textarea}></textarea>
+          <input
+            type="date"
+            name="preferredDates"
+            placeholder="Preferred Dates"
+            className={styles.input}
+            value={form.preferredDates}
+            onChange={handleChange}
+          />
 
-          <button type="submit" className={styles.submitButton}>
-            Send Inquiry
+          {form.preferredDates && (
+            <p style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
+              Selected Date: {formatDisplayDate(form.preferredDates)}
+            </p>
+          )}
+
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            className={styles.textarea}
+            value={form.message}
+            onChange={handleChange}
+          ></textarea>
+
+          <button type="submit" className={styles.submitButton} disabled={loading}>
+            {loading ? 'Sending...' : 'Send Inquiry'}
           </button>
+
+          {status && (
+            <p style={{ marginTop: '1rem', color: status.includes('success') ? 'green' : 'red' }}>
+              {status}
+            </p>
+          )}
         </form>
 
-        {/* Right: Contact Info */}
         <div className={styles.contactInfo}>
           <h3 className={styles.infoTitle}>Get in Touch</h3>
 

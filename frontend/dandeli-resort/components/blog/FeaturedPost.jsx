@@ -11,7 +11,7 @@ export default function FeaturedPost({ post }) {
         <div className={styles.postMeta}>
           <span className={styles.author}>{post.author}</span>
           <span className={styles.date}>
-            {new Date(post.publishedDate).toLocaleDateString('en-US', {
+            {new Date(post.publishedAt).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric'

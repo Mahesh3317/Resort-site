@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resorts",
+  "info": {
+    "singularName": "resort",
+    "pluralName": "resorts",
+    "displayName": "resort"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "price_display": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "tag": {
+      "type": "string"
+    },
+    "rating": {
+      "type": "decimal"
+    }
+  }
+}

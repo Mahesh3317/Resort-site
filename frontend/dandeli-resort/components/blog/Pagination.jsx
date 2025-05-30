@@ -8,9 +8,7 @@ export default function Pagination({ currentPage = 1, totalPages = 1 }) {
         <Link
           key={page}
           href={`/blog?page=${page}`}
-          className={`${styles.pageLink} ${
-            currentPage === page ? styles.active : ''
-          }`}
+          className={`${styles.pageLink} ${currentPage === page ? styles.active : ''}`}
         >
           {page}
         </Link>

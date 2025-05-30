@@ -1,9 +1,10 @@
-import HeroSection from '@/components/Activities/HeroSection';
+import AdventureAwaits from '@/components/Activities/AdventureAwaits';
+import ActivitiesSection from '@/components/Activities/ActivitiesSection';
 export default function HomePage() {
   return (
     <div>
-      <HeroSection />
-      {/* Other sections */}
+      <AdventureAwaits />
+      <ActivitiesSection />
     </div>
   );
 }

@@ -6,14 +6,14 @@ export default function OtherPosts({ posts, currentPage = 1, totalPages = 1 }) {
     <section className={styles.otherPosts}>
       <div className={styles.postsList}>
         {posts.map((post) => (
-          <div key={post.id} className={styles.postCard}>
+          <div key={post.slug} className={styles.postCard}>
             <span className={styles.category}>{post.category}</span>
             <h3 className={styles.title}>{post.title}</h3>
             <p className={styles.excerpt}>{post.excerpt}</p>
             <div className={styles.postMeta}>
               <span className={styles.author}>{post.author}</span>
               <span className={styles.date}>
-                {new Date(post.publishedDate).toLocaleDateString('en-US', {
+                {new Date(post.publishedAt).toLocaleDateString('en-US', {
                   month: 'short',
                   day: 'numeric',
                   year: 'numeric'

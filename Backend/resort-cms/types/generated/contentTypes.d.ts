@@ -465,6 +465,7 @@ export interface ApiContactInquiryContactInquiry
 export interface ApiResortResort extends Struct.CollectionTypeSchema {
   collectionName: 'resorts';
   info: {
+    description: '';
     displayName: 'resort';
     pluralName: 'resorts';
     singularName: 'resort';
@@ -477,10 +478,7 @@ export interface ApiResortResort extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
-    image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

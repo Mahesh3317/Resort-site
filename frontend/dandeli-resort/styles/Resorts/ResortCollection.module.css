@@ -1,133 +1,181 @@
-.container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.heading {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: bold;
-}
-
-.grid {
+.resortGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
-.card {
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.resortCard {
+  position: relative;
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+.resortCard:hover {
+  transform: scale(1.02);
 }
 
-.imageWrapper {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-}
-
-.image {
+.cardImage {
   width: 100%;
-  height: 100%;
+  height: 200px;
   object-fit: cover;
 }
 
-.tag {
+.imagePlaceholder {
+  width: 100%;
+  height: 200px;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+}
+
+.tagBadge {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #218838;
+  background-color: #0070f3;
   color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 6px;
+  z-index: 1;
 }
 
 .cardContent {
-  padding: 1rem;
+  padding: 15px;
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.location {
-  font-size: 1rem;
-  color: #777;
-  margin: 0.5rem 0;
-}
-
-.description {
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-}
-
-.bottomRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.price {
+.resortName {
+  font-size: 18px;
   font-weight: bold;
-  color: #28a745;
+  margin: 0 0 8px;
 }
 
-.bookButton {
-  background-color: #218838;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+.resortPrice {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.resortRating {
+  font-size: 14px;
+  color: #ffb400;
+}
+/* Add to your ResortCollection.module.css */
+
+.resortContainer {
+  padding: 20px;
+}
+
+.tagFilters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tagFilter {
+  padding: 8px 16px;
+  background: #f0f0f0;
   border: none;
+  border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.bookButton:hover {
-  background-color: #218838;
+.tagFilter:hover {
+  background: #e0e0e0;
 }
 
-.buttonContainer {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.toggleButton {
-  background-color: #28a745;
+.tagFilter.active {
+  background: #0070f3;
   color: white;
-  padding: 0.8rem 2rem;
+}
+
+.tagBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 112, 243, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.imageContainer {
+  position: relative;
+}
+
+/* Keep all your existing styles below */
+
+/* Add to your ResortCollection.module.css */
+
+.resortContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.resortGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* Card styles remain the same as before */
+.resortCard {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.resortCard:hover {
+  transform: translateY(-5px);
+}
+
+.viewControls {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.viewButton {
+  padding: 12px 24px;
+  background: #0070f3;
+  color: white;
   border: none;
   border-radius: 30px;
-  font-size: 1.2rem;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.toggleButton:hover {
-  background-color: #218838;
-  transform: translateY(-3px);
+.viewButton:hover {
+  background: #0060d6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.3);
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* Keep all your existing tag and image styles */

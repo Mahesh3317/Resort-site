@@ -1,131 +1,160 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
+import styles from '@/styles/Resorts/ResortCollection.module.css';
+import {
+  FaSwimmingPool,
+  FaConciergeBell,
+  FaUtensils,
+  FaUmbrellaBeach,
+  FaWhatsapp
+} from 'react-icons/fa';
 
-const ResortCollection = ({ limit = null, showFilters = true }) => {
-  const [resorts, setResorts] = useState([]);
-  const [filteredResorts, setFilteredResorts] = useState([]);
-  const [selectedFilter, setSelectedFilter] = useState('All');
-  const [showAll, setShowAll] = useState(false);
-  const router = useRouter();
+const ResortCollection = () => {
+  const [guestCount, setGuestCount] = useState(0);
+  const scrollRef = useRef(null);
 
-  const filters = ['All', 'Family', 'Featured', '5 Star'];
-
+  // Animated guest count
   useEffect(() => {
-    axios.get('http://localhost:1337/api/resorts?populate=*')
-      .then((res) => {
-        const data = res.data?.data || [];
-        setResorts(data);
-        setFilteredResorts(data);
-      })
-      .catch((err) => {
-        console.error('Error fetching resorts:', err);
-      });
+    let count = 0;
+    const interval = setInterval(() => {
+      if (count < 200) {
+        count++;
+        setGuestCount(count);
+      } else {
+        clearInterval(interval);
+      }
+    }, 5);
+    return () => clearInterval(interval);
   }, []);
 
-  const handleFilter = (filter) => {
-    setSelectedFilter(filter);
-    if (filter === 'All') {
-      setFilteredResorts(resorts);
-    } else {
-      const filtered = resorts.filter(resort =>
-        resort?.attributes?.tag?.toLowerCase() === filter.toLowerCase()
-      );
-      setFilteredResorts(filtered);
-    }
+  // Infinite auto-scroll carousel
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    let scrollAmount = 0;
+    const scrollStep = 1;
+
+    const scroll = () => {
+      if (!scrollContainer) return;
+      scrollAmount += scrollStep;
+      if (scrollAmount >= scrollContainer.scrollWidth) {
+        scrollAmount = 0;
+      }
+      scrollContainer.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    };
+
+    const autoScroll = setInterval(scroll, 30);
+    return () => clearInterval(autoScroll);
+  }, []);
+
+  // Get center of the container for scaling effect
+  const getCenterOffset = () => {
+    const container = scrollRef.current;
+    if (!container) return 0;
+    return container.offsetLeft + container.clientWidth / 2;
   };
 
-  const displayResorts = () => {
-    const list = showAll || !limit ? filteredResorts : filteredResorts.slice(0, limit);
+  const handleScroll = () => {
+    const container = scrollRef.current;
+    const center = getCenterOffset();
+    if (!container) return;
 
-    return list.map((item) => {
-      const resort = item?.attributes;
-      const imageUrl = resort?.image?.data?.attributes?.url
-        ? resort.image.data.attributes.url
-        : '/fallback.jpg';
+    const cards = container.querySelectorAll(`.${styles.card}`);
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(center - cardCenter);
+      const scale = Math.max(0.9, 1 - distance / 500);
 
-      return (
-        <div
-          key={item.id}
-          style={{
-            border: '1px solid #ddd',
-            borderRadius: '8px',
-            padding: '1rem',
-            cursor: 'pointer',
-            transition: '0.2s'
-          }}
-          onClick={() => router.push(`/resorts/${item.id}`)}
-        >
-          <img
-            src={imageUrl}
-            alt={resort?.name || 'Resort'}
-            onError={(e) => (e.target.src = '/fallback.jpg')}
-            style={{
-              width: '100%',
-              height: '200px',
-              objectFit: 'cover',
-              borderRadius: '4px'
-            }}
-          />
-          <h3>{resort?.name || 'Unnamed Resort'}</h3>
-          <p>{resort?.location || 'Unknown Location'}</p>
-          <p>{resort?.description?.slice(0, 100) || 'No description available'}...</p>
-          <strong>{resort?.price_display || 'Price on request'}</strong>
-        </div>
-      );
+      card.style.transform = `scale(${scale})`;
+      if (distance < 50) {
+        card.classList.add(styles.focused);
+      } else {
+        card.classList.remove(styles.focused);
+      }
     });
   };
 
+useEffect(() => {
+  const scrollContainer = scrollRef.current;
+  if (!scrollContainer) return;
+
+  let scrollAmount = 0;
+  const scrollStep = 1;
+
+  const scroll = () => {
+    scrollAmount += scrollStep;
+    if (scrollAmount >= scrollContainer.scrollWidth / 2) {
+      scrollAmount = 0;
+      scrollContainer.scrollLeft = 0;
+    } else {
+      scrollContainer.scrollLeft = scrollAmount;
+    }
+  };
+
+  const interval = setInterval(scroll, 20);
+  return () => clearInterval(interval);
+}, []);
+
+
+
   return (
-    <section style={{ padding: '2rem' }}>
-      <h2>Our Resort Collection</h2>
+    <section className={styles.wrapper}>
+      {/* Left Section - Image + Scrollable Cards */}
+      <div className={styles.leftSection}>
+        <div className={styles.imageContainer}>
+          <img src="/img/Untitled design.jpg" alt="Main Resort" className={styles.mainImage} />
 
-      {showFilters && (
-        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
-          {filters.map(filter => (
-            <button
-              key={filter}
-              style={{
-                backgroundColor: filter === selectedFilter ? '#333' : '#eee',
-                color: filter === selectedFilter ? '#fff' : '#000',
-                padding: '0.5rem 1rem',
-                border: 'none',
-                cursor: 'pointer',
-                borderRadius: '4px'
-              }}
-              onClick={() => handleFilter(filter)}
-            >
-              {filter}
-            </button>
-          ))}
+          <div className={styles.cardOverlayRow} ref={scrollRef}>
+            // inside ResortCollection component
+
+<div className={styles.cardOverlayRow} ref={scrollRef}>
+  {[...Array(2)].flatMap((_, copyIndex) =>
+    [1, 2, 3, 4, 5, 6, 7].map((item, index) => (
+      <div key={`${copyIndex}-${index}`} className={styles.card}>
+        <div className={styles.cardInner}>
+          <div className={styles.cardFront}>
+            <img
+              src={`/img/Untitled design.jpg`}
+              alt={`Card ${item}`}
+              className={styles.cardImage}
+            />
+          </div>
+          <div className={styles.cardBack}>
+            <p className={styles.cardDetails}>Details for Feature {item}</p>
+          </div>
         </div>
-      )}
+      </div>
+    ))
+  )}
+</div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '1rem'
-      }}>
-        {displayResorts()}
+          </div>
+        </div>
       </div>
 
-      {limit && filteredResorts.length > limit && (
-        <div style={{ marginTop: '1rem', textAlign: 'center' }}>
-          <button
-            onClick={() => setShowAll(!showAll)}
-            style={{
-              padding: '0.5rem 1rem',
-              backgroundColor: '#0070f3',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}
-          >
-            {showAll ? 'View Less' : 'View All Resorts'}
-          </button>
+      {/* Right Section remains untouched */}
+      <div className={styles.rightSection}>
+        <p className={styles.label}>EXCLUSIVE RETREAT</p>
+        <h2 className={styles.heading}>Peaceful Getaways</h2>
+        <p className={styles.description}>
+          Discover unparalleled luxury at our secluded resort, <br />
+          where contemporary design meets breathtaking natural beauty.
+          Each villa is a private sanctuary with panoramic ocean views,
+          offering the perfect balance of serenity and indulgence.
+        </p>
+
+        <div className={styles.featuresRow}>
+          <div className={styles.feature}><FaSwimmingPool /> Infinity Pool</div>
+          <div className={styles.feature}><FaUtensils /> Fine Dining</div>
+          <div className={styles.feature}><FaConciergeBell /> Spa Services</div>
+          <div className={styles.feature}><FaUmbrellaBeach /> Private Beach</div>
         </div>
-      )}
+
+        <div className={styles.footer}>
+          <a href="https://wa.me/YOUR-NUMBER" className={styles.whatsapp}>
+            <FaWhatsapp size={20} /> Book Now via WhatsApp
+          </a>
+        </div>
+      </div>
     </section>
   );
 };

@@ -1,133 +1,284 @@
-.container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+/* ResortCollection.module.css */
 
-.heading {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: bold;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.wrapper {
+  display: flex;
+  background-color: #fdf9f3;
+  padding: 3rem 2rem;
+  font-family: 'Lato', sans-serif;
+  flex-wrap: wrap;
   gap: 2rem;
+  height: fit-content;
 }
+
+.leftSection {
+  flex: 1;
+  min-width: 300px;
+}
+
+.rightSection {
+  text-align: center;
+  flex: 1;
+  min-width: 300px;
+  color: #2d2c2c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* .overlayImageTop,
+.overlayImageBottom {
+  position: absolute;
+  width: 250px;
+  height: 230px;
+  border-radius: 5px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+}
+
+.overlayImageTop {
+  top: -5%;
+  right: -100px;
+}
+
+.overlayImageBottom {
+  bottom: -15%;
+  right: -90px;
+} */
+
+/* Horizontally scrollable flip cards */
+.cardRow {
+  display: flex;
+  gap: 1rem;
+  overflow: hidden;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  position: relative;
+}
+
+.cardOverlayRow {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  will-change: transform;
+  animation: scrollLeft 25s linear infinite;
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hide scrollbar */
+.cardOverlayRow::-webkit-scrollbar {
+  display: none;
+}
+.cardOverlayRow {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
 
 .card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  perspective: 1000px;
+  width: 150px;
+  height: 180px;
+  flex-shrink: 0;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
-.imageWrapper {
+.cardInner {
+  width: 100%;
+  height: 100%;
   position: relative;
-  height: 200px;
+  transform-style: preserve-3d;
+   transition: transform 0.8s ease;
+}
+
+
+.card:hover .cardInner,
+.card:focus .cardInner {
+  transform: rotateY(360deg);
+}
+
+
+.cardFront {
+  background-color: white;
+  z-index: 2;
+}
+
+
+.cardBack {
+  background-color: #eee;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+}
+
+.cardFront, .cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
   overflow: hidden;
 }
 
-.image {
+
+.cardImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.tag {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: #218838;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-}
-
-.cardContent {
-  padding: 1rem;
-}
-
-.title {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.location {
+.cardLabel {
+  font-weight: bold;
+  padding: 0.5rem;
   font-size: 1rem;
-  color: #777;
-  margin: 0.5rem 0;
+}
+
+.cardDetails {
+  font-size: 0.9rem;
+} 
+
+/* Smooth scrollbar for scrollable row */
+.cardRow::-webkit-scrollbar {
+  height: 8px;
+}
+
+.cardRow::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.cardRow::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Responsive: stack cards on smaller screens */
+@media (max-width: 600px) {
+  .card {
+    width: 140px;
+    height: 200px;
+  }
+
+  .cardLabel {
+    font-size: 0.9rem;
+  }
+
+  .cardDetails {
+    font-size: 0.85rem;
+  }
+}
+
+.card.focused {
+  transform: scale(1.2);
+  z-index: 2;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card:not(.focused) .cardInner {
+  pointer-events: none; /* Disable hover on non-center cards */
+}
+
+.label {
+  font-size: 1.5rem; /* Bigger and more prominent */
+  letter-spacing: 1px;
+  color: #b89567;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem; /* Bigger heading */
+  color: #1e1e1e;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .description {
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-}
-
-.bottomRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.price {
-  font-weight: bold;
-  color: #28a745;
-}
-
-.bookButton {
-  background-color: #218838;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.bookButton:hover {
-  background-color: #218838;
-}
-
-.buttonContainer {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
   text-align: center;
+  color: #333;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ✅ center the icon + text inside */
+  gap: 0.6rem;
+  background-color: #04929c;
+  padding: 0.8rem 1.2rem;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #eaf1f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.featuresRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* ✅ center align */
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+.footer {
+  display: flex;
+  flex-direction: column; /* ✅ Stack vertically */
+  align-items: center;    /* ✅ Center items horizontally */
+  justify-content: center;
+  gap: 1rem;
   margin-top: 2rem;
 }
 
-.toggleButton {
-  background-color: #28a745;
+.whatsapp {
+  background-color: #25d366;
   color: white;
-  padding: 0.8rem 2rem;
-  border: none;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  padding: 0.8rem 1.4rem;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
-.toggleButton:hover {
-  background-color: #218838;
-  transform: translateY(-3px);
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}

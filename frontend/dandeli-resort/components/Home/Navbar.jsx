@@ -24,12 +24,12 @@ export default function Navbar() {
       {/* Top right section - Contact/Social */}
       <div className={styles.topRightSection}>
         <div className={styles.contactInfo}>
-          <a href="tel:+919876543210" className={styles.contactLink}>
-            <span>+91 98765 43210</span>
+          <a href="tel:+918003200269" className={styles.contactLink}>
+            <span>+91 80032 00269</span>
           </a>
-          <a href="mailto:info@dandeliresort.com" className={styles.contactLink}>
+          <a href="maheshsharma3317js@gmail.com" className={styles.contactLink}>
             <MdEmail className={styles.contactIcon} />
-            <span>info@dandeliresort.com</span>
+            <span>maheshsharma3317js@gmail.com</span>
           </a>
         </div>
         

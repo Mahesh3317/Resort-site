@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styles from '@/styles/Resorts/ResortCollection.module.css';
+import styles from '@/styles/Home/ResortCard.module.css';
 import {
   FaSwimmingPool,
   FaConciergeBell,
   FaUtensils,
   FaUmbrellaBeach,
-  FaWhatsapp
+  FaWhatsapp,
 } from 'react-icons/fa';
 
 const ResortCollection = () => {
@@ -26,127 +26,127 @@ const ResortCollection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Infinite auto-scroll carousel
+  // Auto-scrolling flip cards with pause on hover
   useEffect(() => {
     const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
     let scrollAmount = 0;
     const scrollStep = 1;
+    let intervalId;
 
     const scroll = () => {
-      if (!scrollContainer) return;
       scrollAmount += scrollStep;
-      if (scrollAmount >= scrollContainer.scrollWidth) {
+      if (scrollAmount >= scrollContainer.scrollWidth / 2) {
         scrollAmount = 0;
+        scrollContainer.scrollLeft = 0;
+      } else {
+        scrollContainer.scrollLeft = scrollAmount;
       }
-      scrollContainer.scrollTo({ left: scrollAmount, behavior: 'smooth' });
     };
 
-    const autoScroll = setInterval(scroll, 30);
-    return () => clearInterval(autoScroll);
+    const startAutoScroll = () => {
+      intervalId = setInterval(scroll, 20);
+    };
+
+    const stopAutoScroll = () => {
+      clearInterval(intervalId);
+    };
+
+    startAutoScroll();
+
+    // Pause/resume on hover over container
+    scrollContainer.addEventListener('mouseenter', stopAutoScroll);
+    scrollContainer.addEventListener('mouseleave', startAutoScroll);
+
+    return () => {
+      stopAutoScroll();
+      scrollContainer.removeEventListener('mouseenter', stopAutoScroll);
+      scrollContainer.removeEventListener('mouseleave', startAutoScroll);
+    };
   }, []);
 
-  // Get center of the container for scaling effect
-  const getCenterOffset = () => {
-    const container = scrollRef.current;
-    if (!container) return 0;
-    return container.offsetLeft + container.clientWidth / 2;
-  };
-
-  const handleScroll = () => {
-    const container = scrollRef.current;
-    const center = getCenterOffset();
-    if (!container) return;
-
-    const cards = container.querySelectorAll(`.${styles.card}`);
-    cards.forEach((card) => {
-      const rect = card.getBoundingClientRect();
-      const cardCenter = rect.left + rect.width / 2;
-      const distance = Math.abs(center - cardCenter);
-      const scale = Math.max(0.9, 1 - distance / 500);
-
-      card.style.transform = `scale(${scale})`;
-      if (distance < 50) {
-        card.classList.add(styles.focused);
-      } else {
-        card.classList.remove(styles.focused);
-      }
-    });
-  };
-
-useEffect(() => {
-  const scrollContainer = scrollRef.current;
-  if (!scrollContainer) return;
-
-  let scrollAmount = 0;
-  const scrollStep = 1;
-
-  const scroll = () => {
-    scrollAmount += scrollStep;
-    if (scrollAmount >= scrollContainer.scrollWidth / 2) {
-      scrollAmount = 0;
-      scrollContainer.scrollLeft = 0;
-    } else {
-      scrollContainer.scrollLeft = scrollAmount;
-    }
-  };
-
-  const interval = setInterval(scroll, 20);
-  return () => clearInterval(interval);
-}, []);
-
-
+  const cardData = [
+    {
+      image: '/img/pexels-asadphoto-1450361.jpg',
+      description: 'Relax in our luxurious infinity pool.',
+    },
+    {
+      image: '/img/dining.jpg',
+      description: 'Enjoy fine dining with ocean views.',
+    },
+    {
+      image: '/img/spa.jpg',
+      description: 'Rejuvenate at our world-class spa.',
+    },
+    {
+      image: '/img/beach.jpg',
+      description: 'Private beach access for ultimate relaxation.',
+    },
+  ];
 
   return (
     <section className={styles.wrapper}>
-      {/* Left Section - Image + Scrollable Cards */}
       <div className={styles.leftSection}>
         <div className={styles.imageContainer}>
-          <img src="/img/Untitled design.jpg" alt="Main Resort" className={styles.mainImage} />
+          <img
+            src="/img/Untitled design.jpg"
+            alt="Main Resort"
+            className={styles.mainImage}
+          />
 
-          <div className={styles.cardOverlayRow} ref={scrollRef}>
-            // inside ResortCollection component
-
-<div className={styles.cardOverlayRow} ref={scrollRef}>
-  {[...Array(2)].flatMap((_, copyIndex) =>
-    [1, 2, 3, 4, 5, 6, 7].map((item, index) => (
-      <div key={`${copyIndex}-${index}`} className={styles.card}>
-        <div className={styles.cardInner}>
-          <div className={styles.cardFront}>
-            <img
-              src={`/img/Untitled design.jpg`}
-              alt={`Card ${item}`}
-              className={styles.cardImage}
-            />
-          </div>
-          <div className={styles.cardBack}>
-            <p className={styles.cardDetails}>Details for Feature {item}</p>
+          <div className={styles.scrollWrapper} ref={scrollRef}>
+            <div className={styles.cardOverlayRow}>
+              {[...Array(2)].flatMap((_, copyIndex) =>
+                cardData.map((card, index) => (
+                  <div key={`${copyIndex}-${index}`} className={styles.card}>
+                    <div className={styles.cardInner}>
+                      <div className={styles.cardFront}>
+                        <img
+                          src={card.image}
+                          alt={`Card ${index + 1}`}
+                          className={styles.cardImage}
+                        />
+                      </div>
+                      <div
+                        className={styles.cardBack}
+                        style={{ backgroundImage: `url(${card.image})` }}
+                      >
+                        <p className={styles.cardDetails}>{card.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>
-    ))
-  )}
-</div>
 
-          </div>
-        </div>
-      </div>
-
-      {/* Right Section remains untouched */}
+      {/* Right Section */}
       <div className={styles.rightSection}>
         <p className={styles.label}>EXCLUSIVE RETREAT</p>
         <h2 className={styles.heading}>Peaceful Getaways</h2>
         <p className={styles.description}>
-          Discover unparalleled luxury at our secluded resort, <br />
-          where contemporary design meets breathtaking natural beauty.
-          Each villa is a private sanctuary with panoramic ocean views,
-          offering the perfect balance of serenity and indulgence.
+          Discover unparalleled luxury at our secluded resort, where contemporary
+          design meets breathtaking natural beauty. Each villa is a private
+          sanctuary with panoramic views, offering the perfect balance of serenity
+          and indulgence.
         </p>
 
         <div className={styles.featuresRow}>
-          <div className={styles.feature}><FaSwimmingPool /> Infinity Pool</div>
-          <div className={styles.feature}><FaUtensils /> Fine Dining</div>
-          <div className={styles.feature}><FaConciergeBell /> Spa Services</div>
-          <div className={styles.feature}><FaUmbrellaBeach /> Private Beach</div>
+          <div className={styles.feature}>
+            <FaSwimmingPool /> Infinity Pool
+          </div>
+          <div className={styles.feature}>
+            <FaUtensils /> Fine Dining
+          </div>
+          <div className={styles.feature}>
+            <FaConciergeBell /> Spa Services
+          </div>
+          <div className={styles.feature}>
+            <FaUmbrellaBeach /> Private Beach
+          </div>
         </div>
 
         <div className={styles.footer}>

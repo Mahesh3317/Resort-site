@@ -3,7 +3,7 @@
   background-image: url('/img/resort1.jpg'); /* Your image */
   background-size: cover;
   background-position: center;
-  height: 90vh;
+  height: 65vh;
   display: flex;
   justify-content: center;
   align-items: center;

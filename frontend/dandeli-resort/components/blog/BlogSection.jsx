@@ -1,7 +1,7 @@
-import FeaturedPost from '@/components/Blog/FeaturedPost';
-import LatestPosts from '@/components/Blog/LatestPosts';
-import OtherPosts from '@/components/Blog/OtherPosts';
-import BlogHeader from '@/components/Blog/BlogHeader';
+import FeaturedPost from '@components/Blog/FeaturedPost';
+import LatestPosts from '@components/Blog/LatestPosts';
+import OtherPosts from '@components/Blog/OtherPosts';
+import BlogHeader from '@components/Blog/BlogHeader';
 
 export default function BlogSection({ posts = [], currentPage = 1, totalPages = 1 }) {
   const validPosts = posts.filter(post =>

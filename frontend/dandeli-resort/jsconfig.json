@@ -1,18 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",                        // Set base from project root (inside `frontend/dandeli-resort`)
     "paths": {
-      "@/*": ["./*"],
-      "@components/*": ["components/*"],
-      "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"]
-    },
-    "module": "esnext",
-    "moduleResolution": "node",
-    "allowJs": true,
-    "checkJs": false,
-    "jsx": "preserve",
-    "target": "es6"
+      "@/*": ["./*"],                       // Adjust if your root is not same as frontend root
+      "@components/*": ["./components/*"],  // Add "./" for clarity
+      "@styles/*": ["./styles/*"],
+      "@utils/*": ["./utils/*"]
+    }
   },
   "exclude": ["node_modules"]
 }

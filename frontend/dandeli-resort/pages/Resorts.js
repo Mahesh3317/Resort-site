@@ -1,5 +1,5 @@
-import HeroSection from '@/components/Resorts/HeroSection';
-import ResortCollection from '@/components/Resorts/ResortCollection';
+import HeroSection from '@components/Resorts/HeroSection';
+import ResortCollection from '@components/Resorts/ResortCollection';
 import PopularDestinations from '@components/Resorts/PopularDestinations';
 import UniqueExperiences from '@components/Resorts/UniqueExperiences';
 

@@ -1,5 +1,5 @@
-import AdventureAwaits from '@/components/Activities/AdventureAwaits';
-import ActivitiesSection from '@/components/Activities/ActivitiesSection';
+import AdventureAwaits from '@components/Activities/AdventureAwaits';
+import ActivitiesSection from '@components/Activities/ActivitiesSection';
 export default function HomePage() {
   return (
     <div>

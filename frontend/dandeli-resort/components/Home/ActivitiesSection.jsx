@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import ActivityCard from '@/components/Home/ActivityCard';
+import ActivityCard from '@components/Home/ActivityCard';
 import styles from '@styles/Home/ActivitiesSection.module.css';
 
 // Activity data array

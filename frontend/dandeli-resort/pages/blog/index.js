@@ -1,4 +1,4 @@
-import BlogSection from '@/components/Blog/BlogSection';
+import BlogSection from '@/components/Blog/BlogSection.jsx';
 
 async function getBlogPosts(page = 1) {
   try {

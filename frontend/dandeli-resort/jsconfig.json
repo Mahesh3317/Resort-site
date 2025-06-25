@@ -6,7 +6,13 @@
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
-    }
+    },
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "preserve",
+    "target": "es6"
   },
   "exclude": ["node_modules"]
 }

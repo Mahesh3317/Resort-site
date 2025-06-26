@@ -1,38 +1,49 @@
-import FeaturedPost from '@components/Blog/FeaturedPost';
-import LatestPosts from '@components/Blog/LatestPosts';
-import OtherPosts from '@components/Blog/OtherPosts';
-import BlogHeader from '@components/Blog/BlogHeader';
+import styles from '../../styles/blog/BlogSection.module.css';
 
-export default function BlogSection({ posts = [], currentPage = 1, totalPages = 1 }) {
-  const validPosts = posts.filter(post =>
-    post?.attributes?.title && post?.attributes?.publishedAt
-  );
-
-  if (validPosts.length === 0) {
-    return (
-      <div className="no-posts">
-        <BlogHeader />
-        <p>No blog posts found.</p>
-      </div>
-    );
+const staticPosts = [
+  {
+    id: 1,
+    title: "Exploring Dandeli's Wildlife",
+    excerpt: "Discover the rich biodiversity of our region through guided jungle safaris.",
+    category: "Adventure",
+    date: "June 15, 2023",
+    image: "/images/blog/wildlife.jpg"
+  },
+  {
+    id: 2,
+    title: "New Luxury Cottage Launch",
+    excerpt: "Experience our newly built premium cottages with river views.",
+    category: "Accommodation",
+    date: "May 28, 2023",
+    image: "/images/blog/cottage.jpg"
   }
+];
 
-  const featuredPost = validPosts.find(post => post.attributes.isFeatured) || validPosts[0];
-  const latestPosts = validPosts.slice(0, 3);
-  const otherPosts = validPosts.slice(3);
-
+export default function BlogSection() {
   return (
-    <div className="blog-container">
-      <BlogHeader />
-      {featuredPost && <FeaturedPost post={featuredPost.attributes} />}
-      {latestPosts.length > 0 && <LatestPosts posts={latestPosts.map(p => p.attributes)} />}
-      {otherPosts.length > 0 && (
-        <OtherPosts
-          posts={otherPosts.map(p => p.attributes)}
-          currentPage={currentPage}
-          totalPages={totalPages}
-        />
-      )}
-    </div>
+    <section className={styles.section}>
+      <h2 className={styles.sectionTitle}>Latest Stories</h2>
+      <div className={styles.postsGrid}>
+        {staticPosts.map(post => (
+          <article key={post.id} className={styles.postCard}>
+            <img 
+              src={post.image} 
+              alt={post.title} 
+              className={styles.postImage}
+              onError={(e) => {
+                e.target.src = '/images/placeholder.jpg';
+              }}
+            />
+            <div className={styles.postContent}>
+              <h3 className={styles.postTitle}>{post.title}</h3>
+              <p className={styles.postExcerpt}>{post.excerpt}</p>
+              <div className={styles.postMeta}>
+                <span>{post.category}</span> • <span>{post.date}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }

@@ -1,27 +1,22 @@
-import styles from '@styles/blog/FeaturedPost.module.css';
+import styles from '../../styles/blog/FeaturedPost.module.css';
 
-export default function FeaturedPost({ post }) {
+export default function FeaturedPost() {
   return (
-    <section className={styles.featuredPost}>
-      <h1 className={styles.sectionTitle}>Featured Post</h1>
-      <div className={styles.postCard}>
-        <span className={styles.category}>{post.category}</span>
-        <h2 className={styles.title}>{post.title}</h2>
-        <p className={styles.excerpt}>{post.excerpt}</p>
-        <div className={styles.postMeta}>
-          <span className={styles.author}>{post.author}</span>
-          <span className={styles.date}>
-            {new Date(post.publishedAt).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </span>
-          <span className={styles.readTime}>{post.readTime} min read</span>
-        </div>
-        <a href={`/blog/${post.slug}`} className={styles.readMore}>
-          Read more →
-        </a>
+    <section className={styles.featuredSection}>
+      <div className={styles.featuredContainer}>
+        <h2 className={styles.featuredTitle}>Featured Story</h2>
+        <article className={styles.featuredPost}>
+          <div className={styles.featuredImagePlaceholder}></div>
+          <div className={styles.featuredContent}>
+            <span className={styles.featuredMeta}>
+              <span>Announcement</span>
+              <span>July 15, 2023</span>
+            </span>
+            <h3>Premium Treehouse Experience Now Available</h3>
+            <p>Discover our new luxury treehouse accommodations with breathtaking forest views.</p>
+            <div className={styles.readMore}>Read Full Story →</div>
+          </div>
+        </article>
       </div>
     </section>
   );

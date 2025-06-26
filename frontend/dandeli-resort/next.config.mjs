@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  output: 'export',
   images: {
-    domains: ['res.cloudinary.com'],
-    unoptimized: true // Required for static export
+    unoptimized: true,
+    domains: [], // Empty array
   }
 }
-
 export default nextConfig;

@@ -1,18 +1,28 @@
-import styles from '@components/Blog/Pagination';
-import Link from 'next/link';
+import styles from '../../styles/blog/Pagination.module.css';
 
-export default function Pagination({ currentPage = 1, totalPages = 1 }) {
+export default function Pagination({ currentPage = 1, totalPages = 5 }) {
   return (
-    <div className={styles.pagination}>
-      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-        <Link
-          key={page}
-          href={`/blog?page=${page}`}
-          className={`${styles.pageLink} ${currentPage === page ? styles.active : ''}`}
-        >
-          {page}
-        </Link>
-      ))}
-    </div>
+    <nav className={styles.pagination}>
+      <ul className={styles.paginationList}>
+        <li className={`${styles.pageItem} ${currentPage === 1 ? styles.disabled : ''}`}>
+          <a href={`?page=${currentPage - 1}`} className={styles.pageLink}>←</a>
+        </li>
+        
+        {[...Array(totalPages)].map((_, i) => (
+          <li key={i} className={styles.pageItem}>
+            <a 
+              href={`?page=${i + 1}`} 
+              className={`${styles.pageLink} ${currentPage === i + 1 ? styles.active : ''}`}
+            >
+              {i + 1}
+            </a>
+          </li>
+        ))}
+        
+        <li className={`${styles.pageItem} ${currentPage === totalPages ? styles.disabled : ''}`}>
+          <a href={`?page=${currentPage + 1}`} className={styles.pageLink}>→</a>
+        </li>
+      </ul>
+    </nav>
   );
 }

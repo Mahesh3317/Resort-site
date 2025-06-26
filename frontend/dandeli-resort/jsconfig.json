@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",                        // Set base from project root (inside `frontend/dandeli-resort`)
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],                       // Adjust if your root is not same as frontend root
-      "@components/*": ["./components/*"],  // Add "./" for clarity
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
       "@styles/*": ["./styles/*"],
       "@utils/*": ["./utils/*"]
     }

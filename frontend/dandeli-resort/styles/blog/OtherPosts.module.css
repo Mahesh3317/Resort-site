@@ -1,68 +1,110 @@
-.otherPosts {
-  margin-top: 3rem;
+.otherPostsSection {
+  padding: 3rem 1rem;
+  background-color: #f5f5f5;
 }
 
-.postsList {
+.sectionContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  color: #006241;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #006241;
+  margin: 0.5rem auto 0;
+}
+
+.postsContainer {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
 }
 
 .postCard {
-  background: #fff;
-  padding: 1.5rem;
+  background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .postCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.category {
+.postImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.postContent {
+  padding: 1.5rem;
+}
+
+.postCategory {
   display: inline-block;
-  font-weight: bold;
-  color: #4a6b57;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  letter-spacing: 1px;
+  background-color: #e8f5e9;
+  color: #006241;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
 }
 
-.title {
+.postTitle {
+  color: #333;
   font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-  color: #222;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
 }
 
-.excerpt {
-  color: #555;
-  line-height: 1.5;
-  margin-bottom: 1rem;
+.postExcerpt {
+  color: #666;
   font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
 .postMeta {
-  color: #666;
+  color: #888;
   font-size: 0.8rem;
-  margin: 1rem 0;
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  align-items: center;
+}
+
+.postDate {
+  margin-left: 0.5rem;
 }
 
 .readMore {
-  color: #4a6b57;
+  color: #006241;
+  font-weight: 600;
   text-decoration: none;
-  font-weight: bold;
-  font-size: 0.85rem;
   display: inline-block;
-  margin-top: 0.5rem;
-  transition: color 0.2s ease;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
 }
 
 .readMore:hover {
-  color: #3a5a47;
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .postsContainer {
+    grid-template-columns: 1fr;
+  }
 }

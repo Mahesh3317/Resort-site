@@ -1,19 +1,17 @@
 import BlogHeader from '@components/Blog/BlogHeader';
-import BlogSection from '@components/Blog/BlogSection';
 import FeaturedPost from '@components/Blog/FeaturedPost';
 import LatestPosts from '@components/Blog/LatestPosts';
 import OtherPosts from '@components/Blog/OtherPosts';
 import Pagination from '@components/Blog/Pagination';
 
-export default function HomePage() {
+export default function BlogPage() {
   return (
-    <div>
+    <main>
       <BlogHeader />
-      <BlogSection />
-      <FeaturedPost/>
-      <LatestPosts/>
-      <OtherPosts/>
-      <Pagination/>
-    </div>
+      <FeaturedPost />
+      <LatestPosts />
+      <OtherPosts />
+      <Pagination currentPage={1} totalPages={3} />
+    </main>
   );
 }

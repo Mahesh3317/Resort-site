@@ -1,162 +1,80 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styles from '@/styles/Resorts/ResortCollection.module.css';
-import {
-  FaSwimmingPool,
-  FaConciergeBell,
-  FaUtensils,
-  FaUmbrellaBeach,
-  FaWhatsapp,
-} from 'react-icons/fa';
+import React from 'react';
+import styles from '@styles/Home/ResortCollection.module.css';
 
-const ResortCollection = () => {
-  const [guestCount, setGuestCount] = useState(0);
-  const scrollRef = useRef(null);
-
-  // Animated guest count
-  useEffect(() => {
-    let count = 0;
-    const interval = setInterval(() => {
-      if (count < 200) {
-        count++;
-        setGuestCount(count);
-      } else {
-        clearInterval(interval);
-      }
-    }, 5);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Auto-scrolling flip cards with pause on hover
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    let scrollAmount = 0;
-    const scrollStep = 1;
-    let intervalId;
-
-    const scroll = () => {
-      scrollAmount += scrollStep;
-      if (scrollAmount >= scrollContainer.scrollWidth / 2) {
-        scrollAmount = 0;
-        scrollContainer.scrollLeft = 0;
-      } else {
-        scrollContainer.scrollLeft = scrollAmount;
-      }
-    };
-
-    const startAutoScroll = () => {
-      intervalId = setInterval(scroll, 20);
-    };
-
-    const stopAutoScroll = () => {
-      clearInterval(intervalId);
-    };
-
-    startAutoScroll();
-
-    // Pause/resume on hover over container
-    scrollContainer.addEventListener('mouseenter', stopAutoScroll);
-    scrollContainer.addEventListener('mouseleave', startAutoScroll);
-
-    return () => {
-      stopAutoScroll();
-      scrollContainer.removeEventListener('mouseenter', stopAutoScroll);
-      scrollContainer.removeEventListener('mouseleave', startAutoScroll);
-    };
-  }, []);
-
-  const cardData = [
+const FeaturedResorts = () => {
+  const resortFeatures = [
     {
-      image: '/img/pexels-asadphoto-1450361.jpg',
-      description: 'Relax in our luxurious infinity pool.',
+      title: "Healthy Cottages",
+      description: "Premium cottages with organic amenities",
+      icon: "🏡",
+      bgImage: "url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')"
     },
     {
-      image: '/img/dining.jpg',
-      description: 'Enjoy fine dining with ocean views.',
+      title: "Premium Camping",
+      description: "Luxury glamping with sunrise views",
+      icon: "⛺",
+      bgImage: "url('https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')"
     },
     {
-      image: '/img/spa.jpg',
-      description: 'Rejuvenate at our world-class spa.',
+      title: "Rain Dance",
+      description: "Signature tropical rain experience",
+      icon: "🌧️",
+      bgImage: "url('https://images.unsplash.com/photo-1517825738774-7de9363ef735?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')"
     },
     {
-      image: '/img/beach.jpg',
-      description: 'Private beach access for ultimate relaxation.',
+      title: "Luxury Suites",
+      description: "Spacious suites with private jacuzzis",
+      icon: "🛌",
+      bgImage: "url('https://images.unsplash.com/photo-1566669437685-2c987f6a7813?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')"
     },
+    {
+      title: "Gourmet Dining",
+      description: "Farm-to-table culinary experience",
+      icon: "🍽️",
+      bgImage: "url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')"
+    },
+    {
+      title: "Infinity Pools",
+      description: "Stunning valley-view pools",
+      icon: "🏊‍♂️",
+      bgImage: "url('https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')"
+    }
   ];
 
   return (
-    <section className={styles.wrapper}>
-      <div className={styles.leftSection}>
-        <div className={styles.imageContainer}>
-          <img
-            src="/img/Untitled design.jpg"
-            alt="Main Resort"
-            className={styles.mainImage}
-          />
-
-          <div className={styles.scrollWrapper} ref={scrollRef}>
-            <div className={styles.cardOverlayRow}>
-              {[...Array(2)].flatMap((_, copyIndex) =>
-                cardData.map((card, index) => (
-                  <div key={`${copyIndex}-${index}`} className={styles.card}>
-                    <div className={styles.cardInner}>
-                      <div className={styles.cardFront}>
-                        <img
-                          src={card.image}
-                          alt={`Card ${index + 1}`}
-                          className={styles.cardImage}
-                        />
-                      </div>
-                      <div
-                        className={styles.cardBack}
-                        style={{ backgroundImage: `url(${card.image})` }}
-                      >
-                        <p className={styles.cardDetails}>{card.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              )}
+    <section className={styles.resortSection}>
+      <div className={styles.resortHeader}>
+        <h2>PREMIUM RESORT AMENITIES</h2>
+        <p className={styles.subtitle}>Experience Luxury in Nature</p>
+      </div>
+      
+      <div className={styles.resortGrid}>
+        {resortFeatures.map((feature, index) => (
+          <div 
+            key={index}
+            className={styles.featureCard}
+            style={{ 
+              backgroundImage: feature.bgImage,
+              '--card-width': '320px',
+              '--card-height': '280px'
+            }}
+          >
+            <div className={styles.cardOverlay}></div>
+            <div className={styles.featureContent}>
+              <span className={styles.featureIcon}>{feature.icon}</span>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
             </div>
           </div>
-        </div>
+        ))}
       </div>
-
-      {/* Right Section */}
-      <div className={styles.rightSection}>
-        <p className={styles.label}>EXCLUSIVE RETREAT</p>
-        <h2 className={styles.heading}>Peaceful Getaways</h2>
-        <p className={styles.description}>
-          Discover unparalleled luxury at our secluded resort, where contemporary
-          design meets breathtaking natural beauty. Each villa is a private
-          sanctuary with panoramic views, offering the perfect balance of serenity
-          and indulgence.
-        </p>
-
-        <div className={styles.featuresRow}>
-          <div className={styles.feature}>
-            <FaSwimmingPool /> Infinity Pool
-          </div>
-          <div className={styles.feature}>
-            <FaUtensils /> Fine Dining
-          </div>
-          <div className={styles.feature}>
-            <FaConciergeBell /> Spa Services
-          </div>
-          <div className={styles.feature}>
-            <FaUmbrellaBeach /> Private Beach
-          </div>
-        </div>
-
-        <div className={styles.footer}>
-          <a href="https://wa.me/YOUR-NUMBER" className={styles.whatsapp}>
-            <FaWhatsapp size={20} /> Book Now via WhatsApp
-          </a>
-        </div>
+      
+      <div className={styles.resortCta}>
+        <h3>Ready for Your Dream Getaway?</h3>
+        <a href="#" className={styles.primaryCta}>Book Your Stay</a>
       </div>
     </section>
   );
 };
 
-export default ResortCollection;
+export default FeaturedResorts;

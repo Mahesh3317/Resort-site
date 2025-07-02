@@ -1,32 +1,50 @@
 .section {
-    padding: 40px 20px;
-    background-color: #f9f9f9;
-    position: relative;
-  }
-  
+  padding: 20px 10px;
+  background-color: #f9f9f9;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2a7f62;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.cardsContainer {
+  display: flex;
+  overflow-x: hidden;
+  gap: 16px;
+  padding-bottom: 10px;
+}
+
+.exploreButtonContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.exploreButton {
+  background-color: #2a7f62;
+  color: white;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.exploreButton:hover {
+  background-color: #1f6b50;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
   .sectionTitle {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #2a7f62;
-    font-size: 1.8rem;
-    font-weight: 600;
+    font-size: 1.3rem;
   }
-  
-  .cardsContainer {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 20px 0;
-    gap: 20px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  .exploreButton {
+    padding: 10px 18px;
+    font-size: 0.95rem;
   }
-  
-  .cardsContainer::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Pause animation on hover */
-  .cardsContainer:hover {
-    animation-play-state: paused;
-  }
+}

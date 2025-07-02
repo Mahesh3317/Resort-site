@@ -14,10 +14,6 @@ export default function ActivityCard({ activity }) {
       <div className={styles.cardContent}>
         <h3 className={styles.cardTitle}>{activity.name}</h3>
         <p className={styles.cardDescription}>{activity.description}</p>
-        <p className={styles.cardPrice}>₹{activity.price}/person</p>
-        <Link href={`/activities/${activity.slug}`} className={styles.cardButton}>
-          View Details
-        </Link>
       </div>
     </div>
   );

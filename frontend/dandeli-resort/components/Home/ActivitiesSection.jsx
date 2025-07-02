@@ -2,64 +2,42 @@ import { useEffect, useRef } from 'react';
 import ActivityCard from '@components/Home/ActivityCard';
 import styles from '@styles/Home/ActivitiesSection.module.css';
 
-// Activity data array
 const activities = [
   {
     id: 1,
     name: "River Rafting",
-    description: "Thrilling whitewater adventure",
+    description: "Experience thrilling whitewater rafting in Dandeli's river trails.",
     slug: "river-rafting",
-    image: "/images/activities/rafting.jpg",
-    price: "1,200"
+    image: "/img/Camp.jpg",
   },
   {
     id: 2,
     name: "Jungle Safari",
-    description: "Wildlife spotting tour",
+    description: "Explore wild nature with expert-guided jungle safaris in Dandeli.",
     slug: "jungle-safari",
     image: "/images/activities/safari.jpg",
-    price: "900"
   },
   {
     id: 3,
     name: "Zip Lining",
-    description: "Canopy adventure course",
+    description: "Soar through the forest canopy with our secure ziplining adventure.",
     slug: "zip-lining",
     image: "/images/activities/zipline.jpg",
-    price: "800"
   },
   {
     id: 4,
     name: "Kayaking",
-    description: "Guided river exploration",
+    description: "Enjoy peaceful kayaking across serene backwaters and rivers.",
     slug: "kayaking",
     image: "/images/activities/kayaking.jpg",
-    price: "750"
   },
   {
     id: 5,
     name: "Trekking",
-    description: "Mountain hiking tours",
+    description: "Join scenic trekking tours through the Western Ghats mountains.",
     slug: "trekking",
     image: "/images/activities/trekking.jpg",
-    price: "600"
   },
-  {
-    id: 6,
-    name: "Trekking",
-    description: "Mountain hiking tours",
-    slug: "trekking",
-    image: "/images/activities/trekking.jpg",
-    price: "600"
-  },
-  {
-    id: 5,
-    name: "Trekking",
-    description: "Mountain hiking tours",
-    slug: "trekking",
-    image: "/images/activities/trekking.jpg",
-    price: "600"
-  }
 ];
 
 export default function ActivitiesSection() {
@@ -67,33 +45,38 @@ export default function ActivitiesSection() {
 
   useEffect(() => {
     const container = containerRef.current;
-    let scrollAmount = 0;
-    const scrollSpeed = 1;
-    
-    const scroll = () => {
-      if (container) {
-        scrollAmount += scrollSpeed;
-        container.scrollLeft = scrollAmount;
-        
-        if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-          scrollAmount = 0;
-        }
+    if (!container) return;
+
+    // Clone child nodes for infinite scroll effect
+    container.innerHTML += container.innerHTML;
+
+    let scroll = 0;
+    const speed = 0.5;
+
+    const autoScroll = () => {
+      if (container.scrollLeft >= container.scrollWidth / 2) {
+        container.scrollLeft = 0;
+        scroll = 0;
+      } else {
+        scroll += speed;
+        container.scrollLeft = scroll;
       }
-      requestAnimationFrame(scroll);
+      requestAnimationFrame(autoScroll);
     };
-    
-    const scrollInterval = requestAnimationFrame(scroll);
-    
-    return () => cancelAnimationFrame(scrollInterval);
+
+    requestAnimationFrame(autoScroll);
   }, []);
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>Popular Activities</h2>
+      <h2 className={styles.sectionTitle}>Top Dandeli Adventure Activities</h2>
       <div className={styles.cardsContainer} ref={containerRef}>
         {activities.map(activity => (
           <ActivityCard key={activity.id} activity={activity} />
         ))}
+      </div>
+      <div className={styles.exploreButtonContainer}>
+        <a href="/activities" className={styles.exploreButton}>Explore All Activities</a>
       </div>
     </section>
   );

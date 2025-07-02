@@ -12,9 +12,11 @@
     box-sizing: border-box;
   }
   
-  html {
-    scroll-behavior: smooth;
-  }
+html, body {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* ✅ ADD THIS LINE */
+  width: 100%;
+}
   
   body {
     font-family: 'Poppins', sans-serif;

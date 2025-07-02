@@ -1,75 +1,66 @@
 .card {
-    flex: 0 0 280px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    margin-right: 20px;
-    background: white;
-    transition: all 0.3s ease;
+  flex: 0 0 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.imageContainer {
+  height: 160px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  padding: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #222;
+  font-weight: 600;
+}
+
+.cardDescription {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* Mobile Fix */
+@media (max-width: 600px) {
+  .card {
+    flex: 0 0 200px;
   }
-  
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-  }
-  
+
   .imageContainer {
-    height: 180px;
-    overflow: hidden;
+    height: 140px;
   }
-  
-  .cardImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  
-  .card:hover .cardImage {
-    transform: scale(1.05);
-  }
-  
-  .cardContent {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-  }
-  
+
   .cardTitle {
-    margin: 0 0 8px 0;
-    font-size: 1.2rem;
-    color: #333;
-    font-weight: 600;
+    font-size: 1rem;
   }
-  
+
   .cardDescription {
-    color: #666;
-    font-size: 0.9rem;
-    margin: 0 0 8px 0;
-    min-height: 40px;
+    font-size: 0.8rem;
   }
-  
-  .cardPrice {
-    color: #2a7f62;
-    font-weight: 700;
-    margin: 0 0 12px 0;
-    font-size: 1.1rem;
-  }
-  
-  .cardButton {
-    display: block;
-    background: #2a7f62;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-  }
-  
-  .cardButton:hover {
-    background: #1f6b50;
-    transform: translateY(-2px);
-  }
+}
